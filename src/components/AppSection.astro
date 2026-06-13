@@ -1,0 +1,342 @@
+---
+const apps = [
+  {
+    name: "Partner App",
+    description: "Manage your fleet, track drivers, and grow your transportation business.",
+    iconSvg: `<svg width="28" height="28" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="24" cy="10" r="6"/>
+      <path d="M12 44c0-8 6-14 12-14s12 6 12 14"/>
+      <circle cx="40" cy="20" r="4"/>
+      <path d="M40 28c0-4 3-7 7-7s7 3 7 7"/>
+      <circle cx="8" cy="20" r="4"/>
+      <path d="M1 28c0-4 3-7 7-7s7 3 7 7"/>
+    </svg>`,
+    apkUrl: "#",
+    playStoreUrl: "#",
+    appStoreUrl: "#",
+  },
+  {
+    name: "Channel Owner App",
+    description: "Own and operate your transport channel with powerful management tools.",
+    iconSvg: `<svg width="28" height="28" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M24 4L8 12v8c0 12 6 22 16 24 10-2 16-12 16-24v-8L24 4z"/>
+      <path d="M18 24l4 4 8-8"/>
+    </svg>`,
+    apkUrl: "#",
+    playStoreUrl: "#",
+    appStoreUrl: "#",
+  },
+  {
+    name: "Driver App",
+    description: "Earn on your schedule. Accept rides, navigate efficiently, and maximize your earnings.",
+    iconSvg: `<svg width="28" height="28" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="6" y="14" width="36" height="22" rx="4"/>
+      <circle cx="16" cy="30" r="3"/>
+      <circle cx="32" cy="30" r="3"/>
+      <path d="M6 22h36"/>
+      <path d="M10 14l2-6h24l2 6"/>
+    </svg>`,
+    apkUrl: "#",
+    playStoreUrl: "#",
+    appStoreUrl: "#",
+  },
+  {
+    name: "Passenger App",
+    description: "Book rides instantly, track your trip in real-time, and pay seamlessly.",
+    iconSvg: `<svg width="28" height="28" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="24" cy="14" r="8"/>
+      <path d="M8 44c0-10 7-18 16-18s16 8 16 18"/>
+      <path d="M34 10c4-2 8-2 10 1 2 3 0 7-3 9"/>
+      <path d="M14 10c-4-2-8-2-10 1-2 3 0 7 3 9"/>
+    </svg>`,
+    apkUrl: "#",
+    playStoreUrl: "#",
+    appStoreUrl: "#",
+    comingSoon: true,
+  },
+];
+---
+
+<section class="app-section" id="apps">
+  <div class="container">
+    <h2 class="section-title reveal">Download Our Apps</h2>
+    <p class="section-subtitle reveal reveal-delay-1">
+      Get the Meter Taxi experience on any device. Choose your role and download the app that fits you.
+    </p>
+
+    <div class="app-grid">
+      {
+        apps.map((app, i) => (
+          <div class={`app-card reveal reveal-scale reveal-delay-${i + 2}`}>
+            <div class="app-card-header">
+              <div class="app-icon-wrapper">
+                <div class="app-icon-shape" set:html={app.iconSvg}></div>
+              </div>
+              {app.comingSoon && <span class="coming-soon-badge">Coming Soon</span>}
+            </div>
+            <h3 class="app-name">{app.name}</h3>
+            <p class="app-description">{app.description}</p>
+            <div class="download-buttons">
+              <a href={app.apkUrl} class="btn btn-apk" title={`Download ${app.name} APK`}>
+                <span class="btn-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M5 20h14v-2H5v2zm7-18L5.33 9h3.34v4h3.32V9h3.34L12 2z"/>
+                  </svg>
+                </span>
+                <span class="btn-text">
+                  <small>Download</small>
+                  APK
+                </span>
+              </a>
+              <a href={app.playStoreUrl} class="btn btn-play" title={`${app.name} on Google Play`}>
+                <span class="btn-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.807 1.626a1 1 0 010 1.732l-2.807 1.626L15.206 12l2.492-2.492zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/>
+                  </svg>
+                </span>
+                <span class="btn-text">
+                  <small>GET IT ON</small>
+                  Google Play
+                </span>
+              </a>
+              <a href={app.appStoreUrl} class="btn btn-apple" title={`${app.name} on App Store`}>
+                <span class="btn-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.562 12.633c-.01-2.337 1.528-3.46 1.597-3.517-.87-1.274-2.226-1.448-2.71-1.468-1.155-.117-2.253.68-2.839.68-.585 0-1.491-.664-2.45-.646-1.259.018-2.42.733-3.07 1.863-1.309 2.27-.335 5.632.94 7.474.623.903 1.366 1.918 2.342 1.881.94-.038 1.295-.61 2.432-.61 1.137 0 1.456.61 2.45.59 1.012-.018 1.652-.922 2.27-1.83.716-1.045 1.01-2.058 1.028-2.11-.022-.01-1.973-.757-1.99-3.005zM15.007 7.579c.519-.628.868-1.503.772-2.373-.747.03-1.65.498-2.186 1.126-.48.556-.9 1.445-.787 2.298.832.064 1.684-.423 2.201-1.051z"/>
+                  </svg>
+                </span>
+                <span class="btn-text">
+                  <small>Download on the</small>
+                  App Store
+                </span>
+              </a>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  /* App Section Styles */
+  .app-section {
+    padding: 4rem 1rem;
+    background: linear-gradient(135deg, #f8f9ff 0%, #eef1ff 100%);
+  }
+
+  .section-title {
+    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+    font-weight: 800;
+    text-align: center;
+    color: #1a1a2e;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-subtitle {
+    font-size: clamp(0.85rem, 1.8vw, 1rem);
+    text-align: center;
+    color: #555;
+    max-width: 550px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.5;
+  }
+
+  .app-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .app-card {
+    background: #fff;
+    border-radius: 0.875rem;
+    padding: 1.25rem 1rem 1rem;
+    text-align: center;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .app-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  .app-card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    gap: 0.4rem;
+  }
+
+  .app-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .app-icon-shape {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #eef1ff, #e0e7ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4f46e5;
+  }
+
+  .app-icon-shape svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .coming-soon-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #f59e0b, #ef4444);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    animation: pulse-badge 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-badge {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  .app-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0 0 0.35rem;
+  }
+
+  .app-description {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.45;
+    margin: 0 0 0.875rem;
+    flex-grow: 1;
+  }
+
+  .download-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+    justify-content: center;
+  }
+
+  .btn .btn-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.15;
+  }
+
+  .btn small {
+    font-size: 0.4rem;
+    font-weight: 400;
+    opacity: 0.85;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+    letter-spacing: 0.4px;
+  }
+
+  .btn .btn-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .btn-apk {
+    background: #1a1a2e;
+    color: #fff;
+  }
+  .btn-apk:hover {
+    background: #2d2d4a;
+    transform: scale(1.02);
+  }
+
+  .btn-play {
+    background: #3ddc84;
+    color: #000;
+  }
+  .btn-play:hover {
+    background: #2bc76e;
+    transform: scale(1.02);
+  }
+
+  .btn-apple {
+    background: #000;
+    color: #fff;
+  }
+  .btn-apple:hover {
+    background: #1a1a1a;
+    transform: scale(1.02);
+  }
+
+  /* Tablet: 2x2 */
+  @media (min-width: 600px) {
+    .app-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Desktop: 4 in one row, compact */
+  @media (min-width: 1024px) {
+    .app-section {
+      padding: 4rem 2rem;
+    }
+
+    .app-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.875rem;
+    }
+
+    .app-card {
+      padding: 1.25rem 1rem 1.125rem;
+      border-radius: 0.75rem;
+    }
+
+    .app-icon-shape {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+    }
+
+    .app-icon-shape svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    .app-grid {
+      gap: 1rem;
+    }
+  }
+</style>
