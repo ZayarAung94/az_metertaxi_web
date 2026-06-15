@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zayaraung94.github.io/sitemap-index.xml
