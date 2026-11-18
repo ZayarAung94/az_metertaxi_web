@@ -1,0 +1,73 @@
+---
+description: Core project rules for the AzMeterTaxi (Meter Taxi) Astro landing page
+globs:
+alwaysApply: true
+---
+
+# AzMeterTaxi — Vibe Rules
+
+You are working on **az-metertaxi**, a static marketing/landing site built with **Astro 6** and plain CSS. This file defines the non-negotiable conventions. Follow them in every change.
+
+## 1. Tech stack (do not swap without asking)
+
+- **Framework:** Astro 6 (`output: "static"`). No React/Vue/Svelte islands unless explicitly requested.
+- **Language:** TypeScript (strict). `.astro` files use TS in the frontmatter fence.
+- **Styling:** Plain CSS inside each component's `<style>` block. **No Tailwind, no CSS-in-JS, no preprocessor** unless asked.
+- **Runtime JS:** Vanilla DOM APIs inside the component `<script>` tag. No client framework.
+- **Node:** `>=22.12.0`.
+
+## 2. File & component conventions
+
+- Pages live in `src/pages/` (currently a single `index.astro`).
+- Reusable UI lives in `src/components/*.astro`, one section per file (e.g. `Header.astro`, `CountdownSection.astro`, `AppSection.astro`, `Footer.astro`).
+- Component file names are **PascalCase** and end in `.astro`.
+- Every `.astro` file follows the four-part shape, in this order:
+  1. `---` frontmatter fence (imports, props, constants)
+  2. Template markup
+  3. `<style>` block (scoped by default; use `is:global` only for classes intended site-wide)
+  4. `<script>` block (only if interactivity is needed)
+- Static imports at the top of `index.astro`; sections are composed there in visual order.
+
+## 3. Styling rules
+
+- Prefer class-based selectors. **Avoid IDs for styling** (IDs are OK as JS hooks like `#countdown-timer`).
+- Match the existing **design language**:
+  - Dark background gradient: `#0f0c29 → #302b63 → #24243e`.
+  - Primary accent gradient: `#818cf8 → #c084fc` (indigo → purple).
+  - Corner radius scale: chips `2rem`, cards `0.75–0.875rem`, icons `12–14px`.
+  - Font: `"Inter"` (loaded in `index.astro`).
+- Use `clamp()` for responsive type (`font-size: clamp(...)`).
+- Use CSS `transition`/`@keyframes` for motion; reuse the existing reveal system (`.reveal`, `.reveal-left`, `.reveal-scale`, `.animate-*`, `.delay-*`, `.reveal-delay-*`) rather than inventing new animation utilities.
+- Respect `backdrop-filter` with the `-webkit-` prefix (already done for header/countdown).
+- Mobile-first: base styles are mobile, then `@media (min-width: 600px / 768px / 1024px / 1400px)`.
+
+## 4. Data & content
+
+- Section content (app cards, links) is defined as **typed arrays/objects in the component frontmatter** (see `apps` in `AppSection.astro`). Keep it there; do not hardcode repeated markup.
+- Inline SVG icons are stored as template strings in the data object and rendered via `set:html`. Follow this pattern for new icons.
+- External APK/download URLs are strings on the object (`apkUrl`, `playStoreUrl`, `appStoreUrl`). Use `"#"` as a placeholder until a real URL exists.
+
+## 5. Accessibility & SEO
+
+- Preserve semantic landmarks: one `<header>`, one `<main>`, one `<footer>`.
+- Every `<a>` with only an icon needs `title` and/or `aria-label`.
+- Keep existing SEO meta tags (OG, Twitter, canonical) in `index.astro`. If you add a page, replicate them.
+- Images need `alt`. Icons that are purely decorative should be `aria-hidden="true"`.
+
+## 6. Do NOT
+
+- Do not introduce new dependencies without asking (keep the dependency surface minimal; only `astro` in devDependencies).
+- Do not reformat unrelated files or rewrite working sections wholesale.
+- Do not convert CSS to Tailwind or add a UI library.
+- Do not commit secrets/keys (Firebase URLs in `AppSection.astro` are public download links).
+- Do not change `astro.config.mjs` `output` from `static` or the `base` path without confirming deployment target.
+
+## 7. Verification before finishing
+
+Run and make sure both pass:
+
+```bash
+npm run build
+```
+
+If you added interactivity, also run `npm run dev` and confirm the page renders without console errors.

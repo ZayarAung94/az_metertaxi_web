@@ -1,0 +1,63 @@
+---
+description: Patterns for writing and editing .astro components in this project
+globs: ["src/**/*.astro"]
+alwaysApply: false
+---
+
+# Astro Component Patterns
+
+When creating or editing `.astro` files in `src/`, follow these patterns exactly.
+
+## Skeleton
+
+```astro
+---
+// ── Typed data / constants ──
+interface Item {
+  name: string;
+  url: string;
+}
+
+const items: Item[] = [
+  { name: "Example", url: "#" },
+];
+---
+
+<section class="my-section" id="my-section">
+  <div class="container">
+    {
+      items.map((item) => (
+        <a href={item.url} class="card">{item.name}</a>
+      ))
+    }
+  </div>
+</section>
+
+<style is:global>
+  .my-section { /* ... */ }
+</style>
+
+<script>
+  // vanilla, type-annotated
+  const el = document.getElementById("my-section");
+  if (el) { /* ... */ }
+</script>
+```
+
+## Rules
+
+- **Frontmatter first**, always fenced with `---`.
+- Define repeated/mutable data as a typed array of objects in the frontmatter — never duplicate markup by hand.
+- Use `set:html={svgString}` for inline SVG icons kept in data objects.
+- Conditional rendering uses `{cond && <span/>}`.
+- JS variables need null-checks (`if (el)`) since the DOM may not have the node.
+- The `<script>` block is bundled/processed by Astro — it runs once on the client. No `type="module"` needed.
+- Prefer **scoped** `<style>` (default). Only add `is:global` when the class must apply across components (e.g. `.reveal`, `.container` helpers, section-level styling that the page reuses).
+- Keep one `<style>` and one `<script>` per component at the end of the file, in that order.
+- Do not add frameworks (`client:load` etc.) unless explicitly requested.
+
+## Naming
+
+- Component files: `PascalCase.astro`.
+- CSS classes: `kebab-case`, BEM-ish but not strict (`app-card`, `app-card-header`, `btn-play`).
+- IDs for JS hooks: `kebab-case` (`countdown-timer`, `countdown-wrapper`).
